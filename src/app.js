@@ -9,7 +9,7 @@ const foreCast = require("./utils/forecast");
 // console.log(path.join(__dirname,'../public'));
 // express app
 const app = express();
-
+const port = process.env.PORT || 3000;
 // define paths for express config
 console.log("Directory Name: ", __dirname);
 const publicDirPath = path.join(__dirname, "../public");
@@ -83,45 +83,8 @@ app.get("/weather", (req, res) => {
       });
     }
   });
-
-  /**
-   * Access Token
-   * pk.eyJ1IjoiZ29waWdtIiwiYSI6ImNsZW5zZXI0ZDFpZDQzcW5wZXRpcGx1ZTgifQ.kD_nBpg04bdiYg0HPTGWoA
-   */
-  // const accessToken=`pk.eyJ1IjoiZ29waWdtIiwiYSI6ImNsZW5zZXI0ZDFpZDQzcW5wZXRpcGx1ZTgifQ.kD_nBpg04bdiYg0HPTGWoA`;
-  // const url=`https://api.mapbox.com/geocoding/v5/mapbox.places/${req.query.address}.json?access_token=${accessToken}`;
-  // request(url,(err,response,body)=>{
-  //     if(err){
-  //         return res.send({
-  //             success:false,
-  //             err
-  //         })
-  //     };
-  //     const parsedData=JSON.parse(body);
-
-  //     const coordinate1= parsedData.features[0].center[0];
-  //     const coordinate2= parsedData.features[0].center[1];
-
-  //     console.log('coordinates: ',coordinate1,coordinate2);
-
-  //     const url1=`http://api.weatherstack.com/current?access_key=2bc3a060f6402bf2b5e64b2a01c16aca&query=${coordinate1},${coordinate2}`
-
-  //     request(url1,(err,response,body)=>{
-  //         if(err){
-  //             console.log('Error',err);
-  //             return res.send({
-  //                 success:false,
-  //                 err
-  //             })
-  //         };
-  //         const data=JSON.parse(body);
-  //         res.send({
-  //             success:true,
-  //             data
-  //         })
-  //     });
-  // })
 });
+
 app.get("/products/:prodId", (req, res) => {
   console.log("query", req.query);
   console.log("params", req.params);
@@ -148,6 +111,6 @@ app.get("*", (req, res) => {
   });
 });
 // starting the server
-app.listen(3000, () => {
-  console.log("Server is running on port - 3000");
+app.listen(port, () => {
+  console.log(`Server is running on port - ${port}`);
 });
